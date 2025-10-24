@@ -3,11 +3,16 @@ const middlewares = require("../middlewares")
 
 const Register = async (req, res) => {
   try {
-    let exist = await User.exists({ email })
-    if (exist) {
+    let existEmail = await User.exists({
+      email: req.body.email,
+    })
+    let existUsename = await User.exists({
+      username: req.body.username,
+    })
+    if (existEmail || existUsename) {
       res
         .status(400)
-        .send("A user with that email has already been registered!")
+        .send("A user with that email or username has already been registered!")
     } else {
       if (req.body.password === req.body.confirmPassword) {
         let passwordDigest = await middlewares.hashPassword(req.body.password)
