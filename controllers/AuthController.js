@@ -33,6 +33,41 @@ const Register = async (req, res) => {
   }
 }
 
+const Login = async (req, res) => {
+  try {
+    let user
+    const userEmail = await User.findOne({ email: req.body.email })
+    if (!userEmail) {
+      const userUsername = await User.findOne({ username: req.body.email })
+      if (!userUsername) {
+        res.status(400).send("email or username is wrong, try again")
+      } else {
+        user = userUsername
+      }
+    } else {
+      user = userEmail
+    }
+
+    let matched = await middlewares.comparePassword(
+      req.body.password,
+      user.password
+    )
+    if (matched) {
+      let payload = {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+      }
+      let token = middlewares.createToken(payload)
+      return res.status(200).send({ user: payload, token })
+    }
+    res.status(401).send({ status: "Error", msg: "Unauthorized" })
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   Register,
+  Login,
 }
