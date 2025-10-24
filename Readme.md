@@ -25,7 +25,6 @@
 ### ***Getting Started***
 <!-- #### Sign up and sign in as a new user and then walk through the Ranger creation page to begin your warband. -->
 #### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/Cpm3B7Fu/challenge-race).
-#### Slide Pitch [link]()
 
 <!-- #### The project itself was deployed and can be viewed [here](). -->
 
@@ -49,7 +48,6 @@
 
 ### ***Credits***
 #### ERD: [Lucidchart](https://www.lucidchart.com/pages/landing?utm_source=google&utm_medium=cpc&utm_campaign=_chart_en_tier3_mixed_search_brand_exact_&km_CPC_CampaignId=1484560207&km_CPC_AdGroupID=60168114191&km_CPC_Keyword=lucidchart&km_CPC_MatchType=e&km_CPC_ExtensionID=&km_CPC_Network=g&km_CPC_AdPosition=&km_CPC_Creative=354596054350&km_CPC_TargetID=kwd-33511936169&km_CPC_Country=9218669&km_CPC_Device=c&km_CPC_placement=&km_CPC_target=&gad_source=1&gad_campaignid=1484560207&gbraid=0AAAAADLdSjDr_R_dlDmVzkt65tY2oiHAR&gclid=CjwKCAjwpOfHBhAxEiwAm1SwEvKrrCPgTGnl_rHgXoGpeTM4xUH15fRlCa2t4DPrfRR-X9OHni57lBoCiBgQAvD_BwE)
-#### Slide Pitch: [Canvas](https://www.canva.com/)
 #### WireFrame: [Figma](https://www.figma.com/)
 
 
