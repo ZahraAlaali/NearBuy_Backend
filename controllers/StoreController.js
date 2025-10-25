@@ -1,5 +1,4 @@
 const { Store } = require("../models")
-const { CheckSession } = require("./AuthController")
 
 const createStore = async (req, res) => {
   try {
@@ -18,6 +17,37 @@ const createStore = async (req, res) => {
   }
 }
 
+const allStores = async (req, res) => {
+  try {
+    const stores = await Store.find()
+    res.status(200).send(stores)
+  } catch (error) {
+    throw error
+  }
+}
+
+const getStoresByFilter = async (req, res) => {
+  try {
+    const { city, category } = req.body
+    let stores = await Store.find()
+    if (city !== "all") {
+      stores = stores.filter((store) => {
+        return store.city.toLowerCase() === city.toLowerCase()
+      })
+    }
+    if (category !== "all") {
+      stores = stores.filter((store) => {
+        return store.category.includes(category)
+      })
+    }
+    res.status(200).send(stores)
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   createStore,
+  allStores,
+  getStoresByFilter,
 }

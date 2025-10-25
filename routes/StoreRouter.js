@@ -10,4 +10,18 @@ router.post(
   storeCtrl.createStore
 )
 
+router.get(
+  "/",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  storeCtrl.allStores
+)
+
+router.post(
+  "/filter",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  storeCtrl.getStoresByFilter
+)
+
 module.exports = router
