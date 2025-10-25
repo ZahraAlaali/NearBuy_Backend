@@ -85,6 +85,7 @@ const UpdatePassword = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
       }
       return res
         .status(200)

@@ -4,6 +4,7 @@ const logger = require("morgan")
 
 const AuthRouter = require("./routes/AuthRouter")
 const ItemRouter = require("./routes/ItemRouter")
+const StoreRouter = require("./routes/StoreRouter")
 
 const PORT = process.env.PORT || 3000
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use("/auth", AuthRouter)
 app.use("/item", ItemRouter)
+app.use("/store", StoreRouter)
 
 app.use("/", (req, res) => {
   res.send(`Connected!`)
