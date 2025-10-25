@@ -9,7 +9,7 @@ const storeSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    category: { type: String },
+    category: [{ type: String }],
     city: { type: String },
     sales: { type: Number, required: true },
   },
