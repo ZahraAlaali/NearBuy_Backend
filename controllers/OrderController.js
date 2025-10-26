@@ -7,7 +7,7 @@ const newOrder = async (req, res) => {
     req.body.customerId = id
     req.body.price = 0
     req.body.items.forEach((item) => {
-      item.itemName = req.body.price += item.quantity * item.itemPrice
+      req.body.price += item.quantity * item.itemPrice
     })
     console.log(req.body.price)
     const order = await Order.create(req.body)
