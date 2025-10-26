@@ -1,4 +1,4 @@
-const { Schema } = require("mongoose")
+const { Schema, mongo, default: mongoose } = require("mongoose")
 
 const itemSchema = new Schema(
   {
@@ -7,6 +7,10 @@ const itemSchema = new Schema(
     image: { type: String },
     price: { type: Number, required: true  },
     stock: { type: Number, required: true },
+    storeId:{ type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required:true
+    }
   },
   { timestamps: true }
 )
