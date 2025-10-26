@@ -57,7 +57,7 @@ const Login = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
-        type: user.type
+        role: user.role,
       }
       let token = middlewares.createToken(payload)
       return res.status(200).send({ user: payload, token })
@@ -86,6 +86,7 @@ const UpdatePassword = async (req, res) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        role: user.role,
       }
       return res
         .status(200)
