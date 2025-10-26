@@ -24,4 +24,18 @@ router.post(
   storeCtrl.getStoresByFilter
 )
 
+router.put(
+  "/update/:storeId",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  storeCtrl.updateStore
+)
+
+router.delete(
+  "/delete/:storeId",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  storeCtrl.deleteStore
+)
+
 module.exports = router
