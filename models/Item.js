@@ -9,7 +9,7 @@ const itemSchema = new mongoose.Schema(
     stock: { type: Number, required: true },
     storeId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Store",
       required: true,
     },
   },
