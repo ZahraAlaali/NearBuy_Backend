@@ -7,6 +7,9 @@ const createStore = async (req, res) => {
     if (userHasStore) {
       res.status(400).send("User already have store")
     } else {
+      req.body.category = req.body.category.filter((cat) => {
+        return cat !== ""
+      })
       const store = await Store.exists({ name: req.body.name })
       if (store) {
         res.status(400).send("Store name alraedy exists")
@@ -17,6 +20,7 @@ const createStore = async (req, res) => {
           req.body.ownerId = id
           req.body.sales = 0
           const newStore = await Store.create(req.body)
+          res.locals.payload.hasStore = true
           res.status(200).send(newStore)
         } else {
           res.status(400).send("User is not an owner")
