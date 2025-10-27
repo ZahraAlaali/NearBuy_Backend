@@ -14,6 +14,13 @@ const allItems = async (req, res) => {
 
     res.send(items)
   }
+  // else{
+  //   let store = await Store.find({ ownerId: id })
+  //   console.log(store)
+  //   let orders = await Order.find({ storeId: store })
+  //   console.log(orders)
+  //   res.send(orders)
+  // }
 }
 const newItem = async (req, res) => {
   const { id, role } = res.locals.payload
