@@ -7,8 +7,12 @@ router.post(
   middlewares.verifyToken,
   ItemCtrl.newItem
 )
-router.get("/", middlewares.stripToken,
-  middlewares.verifyToken,ItemCtrl.allItems)
+router.get(
+  "/",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  ItemCtrl.allItems
+)
 router.put(
   "/:item_id",
   middlewares.stripToken,
