@@ -19,6 +19,10 @@ const Register = async (req, res) => {
 
         req.body.password = passwordDigest
 
+        //for the profile image
+        if (req.file) {
+          req.body.picture = `/uploads/${req.file.filename}`
+        }
         const user = await User.create(req.body)
 
         res.status(200).send(user)
@@ -64,6 +68,9 @@ const Login = async (req, res) => {
         if (store) {
           payload.hasStore = true
         }
+      }
+      if(user.picture){
+        payload.picture = user.picture
       }
       let token = middlewares.createToken(payload)
       return res.status(200).send({ user: payload, token })
