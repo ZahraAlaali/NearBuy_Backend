@@ -110,4 +110,5 @@ module.exports = {
   getStoresByFilter,
   updateStore,
   deleteStore,
+  OwnerStore,
 }
