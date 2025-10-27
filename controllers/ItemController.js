@@ -1,7 +1,26 @@
-const { Item } = require("../models")
+const { Item, Store } = require("../models")
+
 const allItems = async (req, res) => {
-  let items = await Item.find({})
-  res.send(items)
+  const { id, role } = res.locals.payload
+  if (role == "business") {
+    let store = await Store.find({ ownerId: id })
+    let items = await Item.find({ storeId: store })
+    console.log(store)
+    console.log("business")
+    res.send(items)
+  } else {
+    let items = await Item.find({})
+    console.log("customer")
+
+    res.send(items)
+  }
+  // else{
+  //   let store = await Store.find({ ownerId: id })
+  //   console.log(store)
+  //   let orders = await Order.find({ storeId: store })
+  //   console.log(orders)
+  //   res.send(orders)
+  // }
 }
 const newItem = async (req, res) => {
   const { id, role } = res.locals.payload
