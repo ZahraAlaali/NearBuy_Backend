@@ -1,4 +1,4 @@
-const { User } = require("../models")
+const { User, Store } = require("../models")
 const middlewares = require("../middlewares")
 
 const Register = async (req, res) => {
@@ -58,6 +58,12 @@ const Login = async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+      }
+      if (user.role === "business") {
+        const store = await Store.exists({ ownerId: user._id })
+        if (store) {
+          payload.hasStore = true
+        }
       }
       let token = middlewares.createToken(payload)
       return res.status(200).send({ user: payload, token })
