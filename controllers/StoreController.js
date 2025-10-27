@@ -37,6 +37,20 @@ const allStores = async (req, res) => {
   }
 }
 
+const OwnerStore = async (req, res) => {
+  try {
+    const { id } = res.locals.payload
+    const store = await Store.findOne({ ownerId: id })
+    if (store) {
+      res.status(200).send(store)
+    } else {
+      res.status(400).send("Owner does not have store")
+    }
+  } catch (error) {
+    throw error
+  }
+}
+
 const getStoresByFilter = async (req, res) => {
   try {
     const { city, category } = req.body
