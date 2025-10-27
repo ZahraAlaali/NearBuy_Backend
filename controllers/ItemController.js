@@ -1,6 +1,21 @@
 const { Item, Store } = require("../models")
 
 const allItems = async (req, res) => {
+  // const payload = res.locals.payload
+  // console.log(payload)
+  // if (payload && payload.role == "business") {
+  //   let store = await Store.findOne({ ownerId: payload.id })
+  //     if (!store) {
+  //       console.log("all")
+  //       return res.send([])}
+  //     let items = await Item.find({ storeId: store })
+  //     console.log("business")
+  //     return res.send(items)
+  //   } else {
+  //     let items = await Item.find({})
+  //     console.log("empty")
+  //     return res.send(items)
+  //   }
   const { id, role } = res.locals.payload
   if (role == "business") {
     let store = await Store.find({ ownerId: id })
@@ -11,7 +26,6 @@ const allItems = async (req, res) => {
   } else {
     let items = await Item.find({})
     console.log("customer")
-
     res.send(items)
   }
   // else{
