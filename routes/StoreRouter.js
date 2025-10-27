@@ -17,6 +17,13 @@ router.get(
   storeCtrl.allStores
 )
 
+router.get(
+  "/owner",
+  middlewares.stripToken,
+  middlewares.verifyToken,
+  storeCtrl.OwnerStore
+)
+
 router.post(
   "/filter",
   middlewares.stripToken,
