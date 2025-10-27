@@ -19,6 +19,10 @@ const Register = async (req, res) => {
 
         req.body.password = passwordDigest
 
+        //for the profile image
+        if (req.file) {
+          req.body.picture = `/uploads/${req.file.filename}`
+        }
         const user = await User.create(req.body)
 
         res.status(200).send(user)

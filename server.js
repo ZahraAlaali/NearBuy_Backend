@@ -1,6 +1,8 @@
 const express = require("express")
 const logger = require("morgan")
 const cors = require("cors")
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 const AuthRouter = require("./routes/AuthRouter")
 const ItemRouter = require("./routes/ItemRouter")
@@ -17,6 +19,7 @@ app.use(cors())
 app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use('/uploads', express.static('uploads'))
 
 app.use("/auth", AuthRouter)
 app.use("/item", ItemRouter)

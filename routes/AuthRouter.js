@@ -1,9 +1,11 @@
 const router = require("express").Router()
+const multer = require("multer")
+const upload = multer({ dest: "uploads/" })
 
 const AuthCtrl = require("../controllers/AuthController")
 const middlewares = require("../middlewares")
 
-router.post("/register", AuthCtrl.Register)
+router.post("/register",upload.single("picture"), AuthCtrl.Register)
 
 router.post("/login", AuthCtrl.Login)
 
