@@ -69,6 +69,9 @@ const Login = async (req, res) => {
           payload.hasStore = true
         }
       }
+      if(user.picture){
+        payload.picture = user.picture
+      }
       let token = middlewares.createToken(payload)
       return res.status(200).send({ user: payload, token })
     }
