@@ -15,7 +15,6 @@ const createStore = async (req, res) => {
         res.status(400).send("Store name alraedy exists")
       } else {
         const { id, role } = res.locals.payload
-        console.log(id, role)
         if (role === "business") {
           req.body.ownerId = id
           req.body.sales = 0
@@ -82,7 +81,6 @@ const updateStore = async (req, res) => {
   try {
     const { id } = res.locals.payload
     const store = await Store.findById(req.params.storeId)
-    console.log(store)
     if (store && store.ownerId.equals(id)) {
       store.set(req.body)
       await store.save()

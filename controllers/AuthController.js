@@ -127,6 +127,7 @@ const CheckSession = async (req, res) => {
       payload.hasStore = true
     }
   }
+  console.log(payload)
   res.status(200).send(payload)
 }
 
