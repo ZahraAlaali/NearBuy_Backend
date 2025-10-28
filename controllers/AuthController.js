@@ -1,4 +1,4 @@
-const { User } = require("../models")
+const { User, Store } = require("../models")
 const middlewares = require("../middlewares")
 
 const Register = async (req, res) => {
@@ -19,6 +19,10 @@ const Register = async (req, res) => {
 
         req.body.password = passwordDigest
 
+        //for the profile image
+        if (req.file) {
+          req.body.picture = `/uploads/${req.file.filename}`
+        }
         const user = await User.create(req.body)
 
         res.status(200).send(user)
@@ -59,6 +63,15 @@ const Login = async (req, res) => {
         email: user.email,
         role: user.role,
       }
+      if (user.role === "business") {
+        const store = await Store.exists({ ownerId: user._id })
+        if (store) {
+          payload.hasStore = true
+        }
+      }
+      if (user.picture) {
+        payload.picture = user.picture
+      }
       let token = middlewares.createToken(payload)
       return res.status(200).send({ user: payload, token })
     }
@@ -71,7 +84,9 @@ const Login = async (req, res) => {
 const UpdatePassword = async (req, res) => {
   try {
     let user = await User.findById(req.params.id)
-
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      res.status(400).send("user new password != conform password")
+    }
     let matched = await middlewares.comparePassword(
       req.body.oldPassword,
       user.password
