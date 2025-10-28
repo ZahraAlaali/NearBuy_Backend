@@ -19,6 +19,9 @@ const createStore = async (req, res) => {
         if (role === "business") {
           req.body.ownerId = id
           req.body.sales = 0
+          if (req.file) {
+            req.body.picture = `/uploads/${req.file.filename}`
+          }
           const newStore = await Store.create(req.body)
           res.locals.payload.hasStore = true
           res.status(200).send(newStore)

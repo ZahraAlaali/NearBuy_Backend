@@ -1,10 +1,13 @@
 const router = require("express").Router()
 const middlewares = require("../middlewares")
+const multer = require("multer")
+const upload = multer({ dest: "uploads/" })
 
 const storeCtrl = require("../controllers/StoreController")
 
 router.post(
   "/create",
+  upload.single("picture"),
   middlewares.stripToken,
   middlewares.verifyToken,
   storeCtrl.createStore
