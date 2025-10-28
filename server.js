@@ -8,6 +8,7 @@ const AuthRouter = require("./routes/AuthRouter")
 const ItemRouter = require("./routes/ItemRouter")
 const StoreRouter = require("./routes/StoreRouter")
 const OrderRouter = require("./routes/OrderRouter")
+const UserRouter = require("./routes/UserRouter")
 
 const PORT = process.env.PORT || 3000
 
@@ -25,6 +26,7 @@ app.use("/auth", AuthRouter)
 app.use("/item", ItemRouter)
 app.use("/store", StoreRouter)
 app.use("/order", OrderRouter)
+app.use("/user", UserRouter)
 
 app.use("/", (req, res) => {
   res.send(`Connected!`)

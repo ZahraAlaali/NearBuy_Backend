@@ -69,7 +69,7 @@ const Login = async (req, res) => {
           payload.hasStore = true
         }
       }
-      if(user.picture){
+      if (user.picture) {
         payload.picture = user.picture
       }
       let token = middlewares.createToken(payload)
@@ -84,7 +84,9 @@ const Login = async (req, res) => {
 const UpdatePassword = async (req, res) => {
   try {
     let user = await User.findById(req.params.id)
-
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      res.status(400).send("user new password != conform password")
+    }
     let matched = await middlewares.comparePassword(
       req.body.oldPassword,
       user.password
