@@ -49,6 +49,9 @@ const newItem = async (req, res) => {
       res.status(400).send("The item is already exists")
     } else {
       req.body.storeId = req.params.storeId
+      if (req.file) {
+        req.body.image = `/uploads/${req.file.filename}`
+      }
       const item = await Item.create(req.body)
       res.status(200).send(item)
     }

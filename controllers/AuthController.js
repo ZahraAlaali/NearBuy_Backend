@@ -125,6 +125,7 @@ const CheckSession = async (req, res) => {
     const store = await Store.findOne({ ownerId: payload.id })
     if (store) {
       payload.hasStore = true
+      payload.storeId = store._id
     }
   }
   console.log(payload)
