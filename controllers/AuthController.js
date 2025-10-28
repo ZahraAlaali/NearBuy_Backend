@@ -121,6 +121,12 @@ const UpdatePassword = async (req, res) => {
 
 const CheckSession = async (req, res) => {
   const { payload } = res.locals
+  if (payload.role === "business") {
+    const store = await Store.findOne({ ownerId: payload.id })
+    if (store) {
+      payload.hasStore = true
+    }
+  }
   res.status(200).send(payload)
 }
 

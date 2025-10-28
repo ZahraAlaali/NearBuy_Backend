@@ -1,4 +1,4 @@
-const { User } = require("../models")
+const { User, Store } = require("../models")
 
 const updateProfile = async (req, res) => {
   try {
