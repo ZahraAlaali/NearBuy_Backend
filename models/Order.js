@@ -10,6 +10,9 @@ const orderSchema = new mongoose.Schema(
           ref: "Item",
           required: true,
         },
+        itemName:{
+          type:String, required:true
+        },
         quantity: { type: Number, required: true },
         itemPrice:{ type: Number, required: true }
       },
@@ -26,7 +29,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
     status:{
-      type: String, enum:["received","ready"]
+      type: String, enum:["pending","received","ready"]
     }
   },
   { timestamps: true }
