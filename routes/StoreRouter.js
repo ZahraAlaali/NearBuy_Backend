@@ -13,12 +13,7 @@ router.post(
   storeCtrl.createStore
 )
 
-router.get(
-  "/",
-  middlewares.stripToken,
-  middlewares.verifyToken,
-  storeCtrl.allStores
-)
+router.get("/", storeCtrl.allStores)
 
 router.get(
   "/owner",
