@@ -40,7 +40,7 @@ const allItems = async (req, res) => {
 }
 const newItem = async (req, res) => {
   const { id, role } = res.locals.payload
-
+  console.log(res.locals.payload)
   if (role == "business") {
     console.log(req.params.storeId)
     let existName = await Item.exists({
