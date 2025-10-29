@@ -7,19 +7,21 @@ const newOrder = async (req, res) => {
   let customerHasOrder = await Order.find({ customerId: id }).populate({
     path: "items.itemId",
   })
-  let existingPendingOrder = customerHasOrder.find(
-    (order) =>
+  let existingPendingOrder = customerHasOrder.find((order) => {
+    return (
       String(order.storeId) === String(req.params.storeId) &&
-      order.status === "pending"
-  )
+      order.status !== "ready"
+    )
+  })
   if (existingPendingOrder) {
     for (let i = 0; i < req.body.items.length; i++) {
       let item = req.body.items[i]
       const dbItem = await Item.findById(item.itemId)
-      if (!dbItem) {return res.status(400).send("Item not found")}
-      if (String(dbItem.storeId) !== String(req.params.storeId)) {
-        return res.status(400).send("Item does not belong to this store")
-      }
+      const dbStore = await Store.findById(req.params.storeId)
+      existingPendingOrder.storeName = dbStore.name
+      // if (String(dbItem.storeId) !== String(req.params.storeId)) {
+      //   return res.status(400).send("Item does not belong to this store")
+      // }
       let oldItem = existingPendingOrder.items.find(
         (i) => String(i.itemId._id) === String(item.itemId)
       )
@@ -41,14 +43,20 @@ const newOrder = async (req, res) => {
     await existingPendingOrder.save()
     return res.status(200).send(existingPendingOrder)
   } else {
+    console.log("No existingPendingOrder")
     req.body.storeId = req.params.storeId
     req.body.customerId = id
     req.body.status = "pending"
     req.body.price = 0
+
+    const dbStore = await Store.findById(req.params.storeId) // ✅ Add this
+
     for (let i = 0; i < req.body.items.length; i++) {
       let item = req.body.items[i]
       const dbItem = await Item.findById(item.itemId)
-      if (!dbItem) {return res.status(400).send("Item not found")}
+      if (!dbItem) {
+        return res.status(400).send("Item not found")
+      }
       if (String(dbItem.storeId) !== String(req.params.storeId)) {
         return res.status(400).send("Item does not belong to this store")
       }
@@ -56,13 +64,16 @@ const newOrder = async (req, res) => {
       item.itemPrice = dbItem.price
       req.body.price += item.quantity * item.itemPrice
     }
+
     const order = await Order.create({
       storeId: req.body.storeId,
       customerId: req.body.customerId,
       status: req.body.status,
       price: req.body.price,
+      storeName: dbStore.name,
       items: req.body.items,
     })
+
     return res.status(200).send(order)
   }
 }
@@ -81,6 +92,7 @@ const getOrders = async (req, res) => {
     res.send(orders)
   }
 }
+
 module.exports = {
   newOrder,
   getOrders,
