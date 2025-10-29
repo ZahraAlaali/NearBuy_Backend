@@ -92,6 +92,7 @@ const getOrders = async (req, res) => {
     res.send(orders)
   }
 }
+
 module.exports = {
   newOrder,
   getOrders,
