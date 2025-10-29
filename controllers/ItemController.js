@@ -66,6 +66,9 @@ const editItem = async (req, res) => {
   let item = await Item.findById(req.params.item_id).populate("storeId")
   console.log(item)
   if (item.storeId.ownerId.equals(id) && role == "business") {
+    if (req.file) {
+      req.body.image = `/uploads/${req.file.filename}`
+    }
     let item = await Item.findByIdAndUpdate(req.params.item_id, req.body, {
       new: true,
     })
