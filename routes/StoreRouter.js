@@ -31,6 +31,7 @@ router.post(
 
 router.put(
   "/update/:storeId",
+  upload.single("picture"),
   middlewares.stripToken,
   middlewares.verifyToken,
   storeCtrl.updateStore

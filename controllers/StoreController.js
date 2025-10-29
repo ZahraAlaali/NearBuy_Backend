@@ -82,6 +82,9 @@ const updateStore = async (req, res) => {
     const { id } = res.locals.payload
     const store = await Store.findById(req.params.storeId)
     if (store && store.ownerId.equals(id)) {
+      if (req.file) {
+        req.body.picture = `/uploads/${req.file.filename}`
+      }
       store.set(req.body)
       await store.save()
       res.status(200).send(store)
