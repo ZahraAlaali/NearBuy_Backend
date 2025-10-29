@@ -101,8 +101,9 @@ const deleteStore = async (req, res) => {
     const { id } = res.locals.payload
     const storeInDataBase = await Store.findOne({ _id: req.params.storeId })
     if (storeInDataBase && storeInDataBase.ownerId.equals(id)) {
-      await Item.deleteMany({ storeId: req.params.storeId })
       await Store.deleteOne({ _id: req.params.storeId })
+      res.locals.payload.hasStore = false
+      res.locals.payload.storeId = null
       res.status(200).send("deleted successfully")
     } else {
       res.status(400).send("User is not the owner")
