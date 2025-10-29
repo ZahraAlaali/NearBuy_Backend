@@ -93,7 +93,27 @@ const getOrders = async (req, res) => {
   }
 }
 
+const updateOrder = async (req, res) => {
+  const { id, role } = res.locals.payload
+  if (role === "business") {
+    const order = await Order.findById(req.params.orderId)
+    let nextStatus
+    if (order.status === "received") {
+      nextStatus = "ready"
+    }
+    if (role === "customer") {
+      if (order.status === "pending") {
+        nextStatus = "received"
+      }
+    }
+    order.status = nextStatus
+    await order.save()
+    res.status(200).send(order)
+  }
+}
+
 module.exports = {
   newOrder,
   getOrders,
+  updateOrder,
 }
