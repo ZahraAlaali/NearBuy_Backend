@@ -6,7 +6,6 @@ const itemSchema = new mongoose.Schema(
     description: { type: String },
     image: { type: String },
     price: { type: Number, required: true },
-    stock: { type: Number, required: true },
     storeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store",
