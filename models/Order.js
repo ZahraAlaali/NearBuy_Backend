@@ -10,11 +10,12 @@ const orderSchema = new mongoose.Schema(
           ref: "Item",
           required: true,
         },
-        itemName:{
-          type:String, required:true
+        itemName: {
+          type: String,
+          required: true,
         },
         quantity: { type: Number, required: true },
-        itemPrice:{ type: Number, required: true }
+        itemPrice: { type: Number, required: true },
       },
     ],
     price: { type: Number, required: true },
@@ -23,14 +24,19 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    storeName: {
+      type: String,
+      required: true,
+    },
     storeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store",
       required: true,
     },
-    status:{
-      type: String, enum:["pending","received","ready"]
-    }
+    status: {
+      type: String,
+      enum: ["pending", "received", "ready"],
+    },
   },
   { timestamps: true }
 )
