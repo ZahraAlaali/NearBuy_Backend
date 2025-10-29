@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 
 const orderSchema = new mongoose.Schema(
   {
-    comment: { type: String },
     items: [
       {
         itemId: {

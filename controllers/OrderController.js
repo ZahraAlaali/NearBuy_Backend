@@ -10,7 +10,7 @@ const newOrder = async (req, res) => {
   let existingPendingOrder = customerHasOrder.find((order) => {
     return (
       String(order.storeId) === String(req.params.storeId) &&
-      order.status !== "ready"
+      order.status == "pending"
     )
   })
   if (existingPendingOrder) {
@@ -85,7 +85,7 @@ const getOrders = async (req, res) => {
     console.log(orders)
     res.send(orders)
   } else {
-    let store = await Store.find({ ownerId: id })
+    let store = await Store.findOne({ ownerId: id })
     console.log(store)
     let orders = await Order.find({ storeId: store })
     console.log(orders)
@@ -95,21 +95,16 @@ const getOrders = async (req, res) => {
 
 const updateOrder = async (req, res) => {
   const { id, role } = res.locals.payload
-  if (role === "business") {
-    const order = await Order.findById(req.params.orderId)
-    let nextStatus
-    if (order.status === "received") {
-      nextStatus = "ready"
-    }
-    if (role === "customer") {
-      if (order.status === "pending") {
-        nextStatus = "received"
-      }
-    }
-    order.status = nextStatus
-    await order.save()
-    res.status(200).send(order)
+  const order = await Order.findById(req.params.orderId)
+  let nextStatus
+  if (role === "customer" && order.status === "pending") {
+    nextStatus = "received"
+  } else if (role === "business" && order.status === "received") {
+    nextStatus = "ready"
   }
+  order.status = nextStatus
+  await order.save()
+  res.status(200).send(order)
 }
 
 module.exports = {
