@@ -16,11 +16,13 @@ const allItems = async (req, res) => {
   //     console.log("empty")
   //     return res.send(items)
   //   }
+  console.log(res.locals)
   const { id, role } = res.locals.payload
   if (role == "business") {
-    let store = await Store.find({ ownerId: id })
-    let items = await Item.find({ storeId: store })
+    let store = await Store.findOne({ ownerId: id })
     console.log(store)
+    let items = await Item.find({ storeId: store._id })
+    console.log(items)
     console.log("business")
     res.send(items)
   } else {
