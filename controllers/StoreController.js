@@ -82,6 +82,9 @@ const updateStore = async (req, res) => {
     const { id } = res.locals.payload
     const store = await Store.findById(req.params.storeId)
     if (store && store.ownerId.equals(id)) {
+      if (req.file) {
+        req.body.picture = `/uploads/${req.file.filename}`
+      }
       store.set(req.body)
       await store.save()
       res.status(200).send(store)
@@ -98,8 +101,9 @@ const deleteStore = async (req, res) => {
     const { id } = res.locals.payload
     const storeInDataBase = await Store.findOne({ _id: req.params.storeId })
     if (storeInDataBase && storeInDataBase.ownerId.equals(id)) {
-      await Item.deleteMany({ storeId: req.params.storeId })
       await Store.deleteOne({ _id: req.params.storeId })
+      res.locals.payload.hasStore = false
+      res.locals.payload.storeId = null
       res.status(200).send("deleted successfully")
     } else {
       res.status(400).send("User is not the owner")

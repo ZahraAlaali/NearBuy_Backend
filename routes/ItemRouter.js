@@ -19,6 +19,7 @@ router.get(
 )
 router.put(
   "/:item_id",
+  upload.single("image"),
   middlewares.stripToken,
   middlewares.verifyToken,
   ItemCtrl.editItem
