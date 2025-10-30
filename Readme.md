@@ -1,5 +1,5 @@
 # NearBuy
-## Date: 10/24/2025
+## Date: 10/30/2025
 ### By:
 * Zahra Salman Alaali
 [LinkedIn](http://www.linkedin.com/in/zahra-alaali-) | [GitHub](https://github.com/ZahraAlaali)
@@ -10,9 +10,9 @@
 
 ### ***Description***
 #### NearBuy is a MERN stack web application that connects users with stores based on city and category.
-#### Users can easily browse shops in different cities, explore store details, and view available items. Each shop displays its products with prices, images, and stock information. Users can add items to their cart and complete purchases directly within the app.
+#### Users can easily browse shops in different cities, explore store details, and view available items. Each shop displays its products with prices and images. Users can add items to their cart and complete purchases directly within the app.
 
-#### On the other side, store owners can register as business users, create their own stores, add or update items, and monitor total sales. This system creates a simple yet efficient bridge between customers and small businesses, helping users shop locally and conveniently.
+#### On the other side, store owners can register as business users, create their own store, add or update items. This system creates a simple yet efficient bridge between customers and small businesses, helping users shop locally and conveniently.
 
 ***
 
@@ -27,26 +27,27 @@
 ### ***Getting Started***
 <!-- #### Sign up and sign in as a new user and then walk through the Ranger creation page to begin your warband. -->
 #### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/Cpm3B7Fu/challenge-race).
-#### Slide Pitch [link]()
 #### WireFrame [link](https://www.figma.com/site/MZCPfPEYKCZ3XnnsbNjSEh/Untitled?node-id=0-1&p=f&t=8dBD9ESHzvIDRK9G-0)
 
-<!-- #### The project itself was deployed and can be viewed [here](). -->
+<!-- backend link: https://nearbuy-backend-foq6.onrender.com/ -->
+#### The project itself was deployed and can be viewed [here](https://nearbuy.surge.sh/).
 
 ***
 
 ### ***Screenshots***
 #### ERD
-![ERD](./public/images/Blank%20diagram%20(1).png)
+![ERD](./public/images/ERD.png)
 #### CHD
-![Component Hierarchy Diagram](./public/images/Blank%20diagram%20(2).png)
+![Component Hierarchy Diagram](./public/images/compDiagram.png)
 
 ***
 
 ### ***Future Features***
-- [ ] Store Ratings & Reviews
-- [ ] Wishlist
+- [ ] Sales Analytics Dashboard
+- [ ] Inventory Management
 - [ ] Discounts & Coupons
-- [ ] Mobile App Version
+- [ ] Order Tracking Notifications
+- [ ] Payment
 
 ***
 
