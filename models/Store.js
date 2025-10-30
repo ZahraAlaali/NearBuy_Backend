@@ -12,7 +12,6 @@ const storeSchema = new mongoose.Schema(
     picture: { type: String },
     category: [{ type: String }],
     city: { type: String },
-    sales: { type: Number, required: true },
   },
   { timestamps: true }
 )
