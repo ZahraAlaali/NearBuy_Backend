@@ -16,7 +16,16 @@ const db = require("./db")
 
 const app = express()
 
-app.use(cors())
+app.use(
+  cors({
+    origin: ["https://nearbuy.surge.sh", "http://localhost:5173"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+)
+app.options("*", cors())
+
 app.use(logger("dev"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
