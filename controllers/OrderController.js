@@ -19,9 +19,6 @@ const newOrder = async (req, res) => {
       const dbItem = await Item.findById(item.itemId)
       const dbStore = await Store.findById(req.params.storeId)
       existingPendingOrder.storeName = dbStore.name
-      // if (String(dbItem.storeId) !== String(req.params.storeId)) {
-      //   return res.status(400).send("Item does not belong to this store")
-      // }
       let oldItem = existingPendingOrder.items.find(
         (i) => String(i.itemId._id) === String(item.itemId)
       )
@@ -49,7 +46,7 @@ const newOrder = async (req, res) => {
     req.body.status = "pending"
     req.body.price = 0
 
-    const dbStore = await Store.findById(req.params.storeId) // ✅ Add this
+    const dbStore = await Store.findById(req.params.storeId) 
 
     for (let i = 0; i < req.body.items.length; i++) {
       let item = req.body.items[i]
