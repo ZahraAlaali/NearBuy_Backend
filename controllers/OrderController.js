@@ -82,13 +82,10 @@ const getOrders = async (req, res) => {
   const { id, role } = res.locals.payload
   if (role == "customer") {
     let orders = await Order.find({ customerId: id })
-    console.log(orders)
     res.send(orders)
   } else {
     let store = await Store.findOne({ ownerId: id })
-    console.log(store)
     let orders = await Order.find({ storeId: store })
-    console.log(orders)
     res.send(orders)
   }
 }

@@ -128,7 +128,6 @@ const CheckSession = async (req, res) => {
       payload.storeId = store._id
     }
   }
-  console.log(payload)
   res.status(200).send(payload)
 }
 
