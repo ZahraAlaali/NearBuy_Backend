@@ -7,7 +7,6 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     picture: { type: String },
     role: { type: String, enum: ["customer", "business"], required: true },
-    amount: { type: Number },
   },
   { timestamps: true }
 )
