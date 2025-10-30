@@ -16,15 +16,17 @@ const db = require("./db")
 
 const app = express()
 
-app.use(
-  cors({
-    origin: ["https://nearbuy.surge.sh", "http://localhost:5173"],
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-)
-app.options("*", cors())
+const allowedOrigins = ["https://nearbuy.surge.sh", "http://localhost:5173"]
+const corsOptions = {
+  origin: (origin, cb) => {
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true)
+    return cb(new Error("Not allowed by CORS"))
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}
+app.use(cors(corsOptions))
 
 app.use(logger("dev"))
 app.use(express.json())
